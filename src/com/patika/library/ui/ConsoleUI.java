@@ -8,6 +8,17 @@ import com.patika.library.util.UserFlowHandler;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Console-based user interface for the Library Management System.
+ * <p>
+ *     This class handles all interactions with the user through the terminal,
+ *     including displaying menus, accepting input, and forwarding user actions
+ *     to the controller layer.
+ * </p>
+ *
+ * @author Canberk Sarıkaya
+ * @version 1.0
+ */
 public class ConsoleUI
 {
     private final LibraryController libraryController = new LibraryController();
@@ -15,6 +26,10 @@ public class ConsoleUI
     private final Scanner scanner = new Scanner(System.in);
     private boolean isMainMenuRunning = true;
 
+    /**
+     * Starts the main menu loop and handles user selection.
+     * Displays options and routes them to the appropriate handlers.
+     */
     public void mainMenu()
     {
         while (isMainMenuRunning)
@@ -61,6 +76,9 @@ public class ConsoleUI
         }
     }
 
+    /**
+     * Prints the available options in the library menu to the console.
+     */
     public void printMenu()
     {
         String menu = """
@@ -79,6 +97,10 @@ public class ConsoleUI
         System.out.println(menu);
     }
 
+    /**
+     * Handles the process of adding a new book to the system.
+     * Promps the user for book details and sends them to the controller.
+     */
     public void handleAddBook()
     {
         UserFlowHandler.runWithLoop(() -> {
@@ -96,6 +118,10 @@ public class ConsoleUI
         });
     }
 
+    /**
+     * Allows the user to search for a book by its title.
+     * If found, displays the book details.
+     */
     public void handleSearchBookByTitle()
     {
         UserFlowHandler.runWithLoop(() -> {
@@ -114,6 +140,10 @@ public class ConsoleUI
         });
     }
 
+    /**
+     * Allows the user to search for all books written by a specific author.
+     * Displays a list of matching books.
+     */
     public void handleSearchBookByAuthor()
     {
         UserFlowHandler.runWithLoop(() -> {
@@ -134,6 +164,10 @@ public class ConsoleUI
         });
     }
 
+    /**
+     * Searches for a book based on its ISBN number.
+     * If found, displays the book details.
+     */
     public void handleSearchByISBN()
     {
         UserFlowHandler.runWithLoop(() -> {
@@ -152,6 +186,10 @@ public class ConsoleUI
         });
     }
 
+    /**
+     * Lists books based on borrowing status (borrowed or available).
+     * User selects the status to filter by.
+     */
     public void handleSearchByBorrowingStatus()
     {
         UserFlowHandler.runWithLoop(() -> {
@@ -186,11 +224,18 @@ public class ConsoleUI
         });
     }
 
+    /**
+     * Displays all books currently in the library.
+     */
     public void handleListAllBooks()
     {
         UserFlowHandler.runWithLoop(libraryController::listBooks);
     }
 
+    /**
+     * Allows the user to borrow a book by providing its title.
+     * Checks if the book is available before borrowing.
+     */
     public void handleBorrowBook()
     {
         UserFlowHandler.runWithLoop(() -> {
@@ -227,6 +272,10 @@ public class ConsoleUI
         });
     }
 
+    /**
+     * Allows the user to return a borrowed book by providing its title.
+     * Checks if the book is currently marked as borrowed.
+     */
     public void handleReturnBook()
     {
         UserFlowHandler.runWithLoop(() -> {
